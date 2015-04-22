@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ lang_dir }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>{{ projectName }} | {{ title }}</title>
+    <link rel="stylesheet" href="/cog/lib/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/cog/lib/css/prism/prism.css">
+    <link rel="stylesheet" href="/cog/css/styleguide.css">
+    <script src="/cog/lib/js/prism/prism.js"></script>
+  </head>
+
+  <body class="styleguide">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">{{ projectName }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          {% include "_sidebar-nav.html" %}
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <script src="/cog/lib/js/jquery/jquery.min.js"></script>
+    <script src="/cog/lib/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/cog/js/resize.js"></script>
+  </body>
+</html>

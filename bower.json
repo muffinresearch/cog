@@ -1,0 +1,28 @@
+{
+  "name": "cog",
+  "main": "index.js",
+  "version": "0.0.1",
+  "description": "Cog StyleGuide generator",
+  "license": "MPL2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "exportsOverride": {
+    "bootstrap": {
+      "css": "dist/css/bootstrap.min.css",
+      "fonts": "dist/fonts/*",
+      "js": "dist/js/bootstrap.min.js"
+    },
+    "jquery": {
+      "js": "dist/jquery.min.js"
+    }
+  },
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
+}
