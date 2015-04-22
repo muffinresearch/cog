@@ -4,7 +4,7 @@
   "description": "Static living styleguide generator.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node -e \"require('grunt').cli()\" null test"
   },
   "author": "Stuart Colville",
   "license": "MPL 2.0",
