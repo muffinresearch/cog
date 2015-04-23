@@ -1,9 +1,4 @@
 module.exports = {
-  // pages of content.
-  // pageDir: './pages-dir',  (defaults to ./pages);
-
-  // Template directory for content to be displayed in iframes/
-  contentTemplateDir: '../example-src/templates',
   // Break points determin the resizable iframe size.
   breakPoints: [
     {
@@ -20,11 +15,20 @@ module.exports = {
   // assuming that key is not already defined.
   templateGlobals: {
     projectName: 'Cog Example',
+    appMedia: '/static',
   },
   templateConfig: {
-    // Relative to the CWD. This will normally be called from the
-    // project root. In this example the 'example' dir is where the file
-    // styleguide will be built from.
-    templatePaths: ['../example-src/templates'],
-  }
+    // Relative to the styleguide. In this case it's the example dir.
+    templatePaths: ['../example-src/templates', '../example/templates'],
+  },
+  // This selector is used to narrow down what content is displayed as
+  // sourcecode from the rendered content placed in the iframe.
+  // Here we're setting it globally but it can be overriden
+  // in the page-level config.
+  sourcecodeSelector: 'main',
+  // Detail content here to copy into the build dir.
+  copy: [
+    // src is relative to the styleguide project example.
+    {src: '../example-src/css/', target: 'static/'}
+  ]
 };

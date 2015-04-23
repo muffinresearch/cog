@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {# This template provides the markup that would normally be used in an app view #}
+{% block page %}
 <main id="app">
   <div id="view" class="view">
     <div class="page {% block pageclass %}{% endblock %}">
       <div class="inner">
-        {% block example %}{% example %}
+        {% block example %}{% endblock %}
       </div>
     </div>
   </div>
 </main>
+{% endblock %}

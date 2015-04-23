@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>{{ projectName }} | {{ title }}</title>
+    <title>{{ projectName }}{% if title %} | {{ title }}{% endif %}</title>
     <link rel="stylesheet" href="/cog/lib/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/cog/lib/css/prism/prism.css">
     <link rel="stylesheet" href="/cog/css/styleguide.css">
-    <script src="/cog/lib/js/prism/prism.js"></script>
+    <link rel="stylesheet" href="/cog/lib/css/solarized_light.css">
   </head>
 
   <body class="styleguide">

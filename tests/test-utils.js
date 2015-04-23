@@ -3,6 +3,27 @@
 var path = require('path');
 var utils = require('../utils');
 
+
+describe('utils.highlight()', function(){
+
+  it('should return highlighted HTML', function(){
+    var highlighted = utils.highlight('<div><p>test</p></div>');
+    assert.include(highlighted, 'hljs-tag');
+    assert.include(highlighted, 'hljs-title');
+  });
+
+});
+
+
+describe('utils.getContentBySelector()', function(){
+
+  it('should extract a span', function(){
+    assert.equal(utils.getContentBySelector(
+      '<div><p><span>foo</span></p></div>', 'p'), '<span>foo</span>');
+  });
+
+});
+
 describe('utils.getBaseDir()', function(){
 
   it('should return an absolute path', function(){
@@ -65,7 +86,7 @@ describe('utils.isFile()', function(){
 describe('utils.renderMarkdown()', function(){
 
   it('should render markdown content as string', function(){
-    assert.include(utils.renderMarkdown(null, '# hai'),
+    assert.include(utils.renderMarkdown('# hai'),
                    '<h1 id="hai">hai</h1>');
   });
 

@@ -6,7 +6,7 @@
 
 <h2>Pages</h2>
 <ul class="nav nav-sidebar">
-{% for href, id, caption in pages_navigation_bar %}
+{% for href, id, caption in pageNav %}
   <li{% if id == active_page %} class="active"{% endif %}><a href="{{ href }}">{{ caption }}</a></li>
 {% endfor %}
 </ul>
