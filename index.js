@@ -117,7 +117,7 @@ function buildPages(basePath, config, defaults) {
 
 
 function copyStaticFiles(from, to) {
-  //return fs.copySync(from, to);
+  return fs.copySync(from, to);
 }
 
 function cleanSync(buildDir, noop) {
