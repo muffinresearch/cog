@@ -22,7 +22,6 @@ module.exports = function(grunt) {
 
     mochaTest: {
       options: {
-        log: true,
         require: [
           function(){
             /* jshint -W020 */
@@ -32,11 +31,22 @@ module.exports = function(grunt) {
         reporter: 'spec',
       },
       all: ['tests/*.js']
-    }
+    },
+
+    devserver: {
+      options: {
+        base: 'example/build',
+        type: 'http',
+        port: grunt.option('port') || 4000,
+      },
+      server: {}
+    },
+
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-devserver');
   grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.registerTask('default', ['jshint']);
