@@ -44,6 +44,62 @@ function getConfig(basePath, config, defaults) {
 }
 
 
+function prepareBuildDir(buildDir) {
+  // Cleanout the build dir.
+  cleanSync(buildDir);
+  // Re-create the buildDir
+  if (!utils.isDir(buildDir)) {
+    fs.mkdirSync(buildDir);
+  }
+}
+
+
+function createIframeDir(buildDir) {
+  // Make the iframe dir if needed.
+  var iframeDir = path.join(buildDir, 'iframe');
+  if (!utils.isDir(iframeDir)) {
+    fs.mkdirSync(iframeDir);
+  }
+  return iframeDir;
+}
+
+
+function getPageList(pageDir, config) {
+  var contentExt = config.contentExt;
+  var files = fs.readdirSync(pageDir);
+  var pageList = [];
+
+  // Initial iteration to get all page basenames so
+  // we can provide a complete navigation to each page.
+  for (var i=0; i<files.length; i++) {
+    // Iterate over all the content files (default *.md) in the
+    // pages directory
+    var contentFile = path.join(pageDir, files[i]);
+    if (path.extname(contentFile) !== contentExt) {
+      continue;
+    }
+    // foo/bar/baz.md -> baz
+    var baseName = path.basename(contentFile, contentExt);
+
+    // Render the markdown.
+    var markdown = utils.renderMarkdown(contentFile);
+
+    // Grab the heading to use for title + nav.
+    var heading = utils.getTextBySelector(markdown, 'h1');
+    var id = utils.textToId(heading);
+
+    pageList.push({
+      baseName: baseName,
+      href: '/' + baseName + '.html',
+      id: id,
+      markdown: markdown,
+      heading: heading,
+    });
+  }
+  return pageList;
+}
+
+
 function buildPages(basePath, config, defaults) {
   basePath = utils.absolutify(basePath);
 
@@ -59,35 +115,27 @@ function buildPages(basePath, config, defaults) {
 
   var buildDir = path.join(basePath, config.buildDir);
 
-  // Cleanout the build dir.
-  cleanSync(buildDir);
+  prepareBuildDir(buildDir);
+  var iframeDir = createIframeDir(buildDir);
 
-  if (!utils.isDir(buildDir)) {
-    fs.mkdirSync(buildDir);
-  }
-
-  var iframeDir = path.join(buildDir, 'iframe');
-  if (!utils.isDir(iframeDir)) {
-    fs.mkdirSync(iframeDir);
-  }
-
-  var files = fs.readdirSync(pageDir);
-  var contentExt = config.contentExt;
   var configDir = path.join(basePath, config.configDir);
 
-  for (var i=0; i<files.length; i++) {
-    // Iterate over all the content files (default *.md) in the
-    // pages directory
-    var contentFile = path.join(pageDir, files[i]);
-    var pageContext = {};
+  var pageList = getPageList(pageDir, config);
 
-    if (path.extname(contentFile) !== contentExt) {
-      continue;
+  for (var i=0; i<pageList.length; i++) {
+    var baseName = pageList[i].baseName;
+    var pageContext = {
+      markdown: pageList[i].markdown,
+      title: pageList[i].heading,
+      pageNav: pageList,
+    };
+
+    if (baseName !== 'index') {
+      pageContext.activePage =  pageList[i].id;
     }
-    // foo/bar/baz.md -> baz
-    var baseName = path.basename(contentFile, contentExt);
 
     var pageConfig = {};
+
     // If there's a matching js file in the config dir require it.
     var configPath = path.join(configDir, baseName + '.js');
     if (utils.isFile(configPath)) {
@@ -122,7 +170,7 @@ function buildPages(basePath, config, defaults) {
     }
 
     if (iframeContent !== '') {
-      var iframeContentPath = path.join(buildDir, 'iframe', baseName + '.html');
+      var iframeContentPath = path.join(iframeDir, baseName + '.html');
       fs.writeFileSync(iframeContentPath, iframeContent);
       pageContext.iframeSrc = baseName + '.html';
 
@@ -134,8 +182,6 @@ function buildPages(basePath, config, defaults) {
       pageContext.code = utils.highlight(snippet);
     }
 
-    // Render the markdown.
-    pageContext.markdown = utils.renderMarkdown(contentFile);
     pageContext = utils.defaults(pageContext, config.templateGlobals || {});
 
     var pageTemplate = 'cog-page.html';

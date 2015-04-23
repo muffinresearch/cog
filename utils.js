@@ -104,13 +104,24 @@ function defaults(object, defaultObj) {
 
 /**
 * Extracts the content within selector from HTML string provided.
-* @param {string} html - the HTML string to extract the selector content from
-* @param {string} selector - the selector to find the content to extract
+* @param {string} html - an HTML string
+* @param {string} selector - the selector to extract HTML from
 * @returns {string}
 */
 function getContentBySelector(html, selector) {
   return cheerio.load(html)(selector).html();
 }
+
+/**
+* Extracts the text within selector from HTML string provided.
+* @param {string} html - a string of HTML
+* @param {string} selector - the selector to extract text from/
+* @returns {string}
+*/
+function getTextBySelector(html, selector) {
+  return cheerio.load(html)(selector).text();
+}
+
 
 /**
 * Prettifies HTML.
@@ -127,13 +138,24 @@ function prettyHTML_(html) {
 }
 
 
+/**
+* Noddy text to identifier conversion.
+* @param {string} text - the text to make into an id.
+* @returns {string}
+*/
+function textToId(text) {
+  return text.toLowerCase().replace(' ', '-');
+}
+
 module.exports = {
   absolutify: absolutify,
   defaults: defaults,
   getContentBySelector: getContentBySelector,
+  getTextBySelector: getTextBySelector,
   highlight: highlightFunc,
   isDir: isDir,
   isFile: isFile,
   prettyHTML: prettyHTML_,
   renderMarkdown: renderMarkdown,
+  textToId: textToId,
 };

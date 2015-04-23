@@ -14,6 +14,18 @@ describe('utils.highlight()', function(){
 
 });
 
+describe('utils.textToId()', function(){
+
+  it('should convert test to id', function(){
+    assert.equal(utils.textToId('Example text'), 'example-text');
+  });
+
+  it('should leave things unchanged', function(){
+    assert.equal(utils.textToId('already-done'), 'already-done');
+  });
+
+});
+
 
 describe('utils.getContentBySelector()', function(){
 
@@ -23,6 +35,17 @@ describe('utils.getContentBySelector()', function(){
   });
 
 });
+
+
+describe('utils.getTextBySelector()', function(){
+
+  it('should extract the text from a selector', function(){
+    assert.equal(utils.getTextBySelector(
+      '<div><h1>foo</h1></div>', 'h1'), 'foo');
+  });
+
+});
+
 
 describe('utils.getBaseDir()', function(){
 

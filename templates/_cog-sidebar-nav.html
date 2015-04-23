@@ -1,13 +1,11 @@
-{% set active_page = active_page|default('index') -%}
+{% set activePage = activePage|default('index') -%}
 
 <ul class="nav nav-sidebar">
-  <li{% if 'index' == active_page %} class="active"{% endif %}><a href="/">Overview</a></li>
-</ul>
-
-<h2>Pages</h2>
-<ul class="nav nav-sidebar">
-{% for href, id, caption in pageNav %}
-  <li{% if id == active_page %} class="active"{% endif %}><a href="{{ href }}">{{ caption }}</a></li>
+  <li{% if 'index' == activePage %} class="active"{% endif %}><a href="/">Index</a></li>
+{% for page in pageNav %}
+  {% if page.baseName != 'index' %}
+  <li{% if page.id == activePage %} class="active"{% endif %}><a href="{{ page.href }}">{{ page.heading }}</a></li>
+  {% endif %}
 {% endfor %}
 </ul>
 
