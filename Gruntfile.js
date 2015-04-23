@@ -22,6 +22,7 @@ module.exports = function(grunt) {
 
     mochaTest: {
       options: {
+        log: true,
         require: [
           function(){
             /* jshint -W020 */

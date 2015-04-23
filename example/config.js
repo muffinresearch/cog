@@ -18,7 +18,13 @@ module.exports = {
   ],
   // Anything here is added to the context
   // assuming that key is not already defined.
-  globals: {
+  templateGlobals: {
     projectName: 'Cog Example',
+  },
+  templateConfig: {
+    // Relative to the CWD. This will normally be called from the
+    // project root. In this example the 'example' dir is where the file
+    // styleguide will be built from.
+    templatePaths: ['../example-src/templates'],
   }
 };

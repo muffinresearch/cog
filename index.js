@@ -1,9 +1,8 @@
 var format = require('util').format;
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 
-var Promise = require('es6-promise').Promise;
-//var rimraf = require('rimraf');
+var nunjucks = require('nunjucks');
 
 var utils = require('./utils');
 
@@ -16,11 +15,26 @@ var globalDefaults = {
   buildDir: 'build',
   configDir: 'config',
   contentExt: '.md',
-  templateRender: function(path, context, config) {
-    console.log(path);
-    console.log(context);
-    console.log(config);
+  // The default nunjucjs renderer. This means you can override
+  // the template renderer with any other template lib you want to use.
+  templateRenderer: function(template, context, config) {
+    config = config || {};
+    var templatePaths = config.templatePaths || [];
+    var nunjucksLoaders = [];
+    for (var i=0; i < templatePaths.length; i++) {
+      var templDirPath = templatePaths[i];
+      nunjucksLoaders.push(new nunjucks.FileSystemLoader(templDirPath));
+    }
 
+    // Append cog's own templates onto the template path list.
+    nunjucksLoaders.push(new nunjucks.FileSystemLoader(
+                         path.join(__dirname, 'templates')));
+
+    console.log(path.join(__dirname, 'templates'));
+
+    var nunjucksConfig = config.nunjucksConfig || {};
+    var env = new nunjucks.Environment(nunjucksLoaders, nunjucksConfig);
+    return env.render(template, context);
   }
 };
 
@@ -41,88 +55,89 @@ function buildPages(basePath, config, defaults) {
   }
 
   var buildDir = path.join(basePath, config.buildDir);
-  clean(buildDir)
-    .then(function() {
-      var files = fs.readdirSync(pageDir);
-      var contentExt = config.contentExt;
-      var configDir = path.join(basePath, config.configDir);
 
-      for (var i=0; i<files.length; i++) {
-        // Iterate over all the content files (default *.md) in the
-        // pages directory
-        var contentFile = files[i];
-        var pageContext = {};
+  // Cleanout the build dir.
+  cleanSync(buildDir);
 
-        if (path.extname(contentFile) !== contentExt) {
-          continue;
-        }
-        // foo/bar/baz.md -> baz
-        var baseName = path.basename(contentFile, contentExt);
+  if (!utils.isDir(buildDir)) {
+    fs.mkdirSync(buildDir);
+  }
 
-        // If there's a matching js file in the config dir require it.
-        var configPath = path.join(configDir, baseName, '.js');
-        if (utils.isFile(configPath)) {
-          config.pageConfig = require(configPath.replace('.js', ''));
-        }
+  var files = fs.readdirSync(pageDir);
+  var contentExt = config.contentExt;
+  var configDir = path.join(basePath, config.configDir);
 
-        if (config.pageConfig && config.pageConfig.templatePath) {
-          var templatePath = config.pageConfig.templatePath;
-          if (utils.isFile(path.join(path.dirname(configPath), templatePath))) {
-            // If that contains a template path render it with any context and
-            // write it out into iframe dir of the build directory.
+  for (var i=0; i<files.length; i++) {
+    // Iterate over all the content files (default *.md) in the
+    // pages directory
+    var contentFile = path.join(pageDir, files[i]);
+    var pageContext = {};
 
-          }
-        }
+    if (path.extname(contentFile) !== contentExt) {
+      continue;
+    }
+    // foo/bar/baz.md -> baz
+    var baseName = path.basename(contentFile, contentExt);
 
+    // If there's a matching js file in the config dir require it.
+    var configPath = path.join(configDir, baseName + '.js');
+    console.log('configPath: %s', configPath);
+    if (utils.isFile(configPath)) {
+      config.pageConfig = require(configPath.replace('.js', ''));
+    }
 
-        // Pass any context plus global context and render the page html
+    if (config.pageConfig && config.pageConfig.templatePath) {
+      var templatePath = config.pageConfig.templatePath;
+      if (utils.isFile(path.join(path.dirname(configPath), templatePath))) {
+        // If that contains a template path render it with any context and
+        // write it out into iframe dir of the build directory.
 
-        // Render the markdow.
-        pageContext.markdown = utils.renderMarkdown(contentFile);
       }
-    }).catch(function(err) {
-      throw err;
-    });
+    }
+
+    // Render the markdow.
+    console.log(contentFile);
+    pageContext.markdown = utils.renderMarkdown(contentFile);
+
+    var pageTemplate = 'cog-page.html';
+    if (baseName === 'index') {
+      pageTemplate = 'cog-index.html';
+    }
+
+    // Pass any context plus global context and render the page html
+    var rendered = config.templateRenderer(pageTemplate, pageContext,
+                                           config.templateConfig || {});
+
+    var builtPagePath = path.join(buildDir, baseName + '.html');
+    fs.writeFileSync(builtPagePath, rendered);
+  }
+
+  copyStaticFiles(path.join(__dirname, 'static'), buildDir);
 }
 
 
-
-function copyStaticFiles(buildDir) {
-  console.log(buildDir);
+function copyStaticFiles(from, to) {
+  //return fs.copySync(from, to);
 }
 
-function clean(buildDir, noop) {
-  return new Promise(function(resolve, reject) {
-    if (buildDir === '/') {
-      reject(new Error('buildDir cannot be /'));
-    }
-    if (buildDir.indexOf(process.cwd()) === -1) {
-      reject(new Error('buildDir must be under the CWD'));
-    }
-
-    if (noop) {
-      // Only shows the top level not a recursive list.
-      fs.readdir(buildDir, function(err, files) {
-        if (err) {
-          reject(err);
-        }
-        resolve(files);
-      });
-    } else {
-      resolve();
-//      rimraf(buildDir, function(err) {
-//        if (err) {
-//          reject(err);
-//        }
-//        resolve();
-//      });
-    }
-  });
+function cleanSync(buildDir, noop) {
+  if (buildDir === '/') {
+    throw new Error('buildDir cannot be /');
+  }
+  if (buildDir.indexOf(process.cwd()) === -1) {
+    throw new Error('buildDir must be under the CWD');
+  }
+  if (noop) {
+    // Only shows the top level not a recursive list.
+    return fs.readdirSync(buildDir);
+  } else {
+    //return emptyDirSync(buildDir);
+  }
 }
 
 module.exports = {
   buildPages: buildPages,
-  clean: clean,
+  cleanSync: cleanSync,
   copyStaticFiles: copyStaticFiles,
   getConfig: getConfig,
 };
