@@ -3,7 +3,6 @@ var fs = require('fs');
 var path = require('path');
 
 var Promise = require('es6-promise').Promise;
-var _ = require('underscore');
 //var rimraf = require('rimraf');
 
 var utils = require('./utils');
@@ -17,12 +16,18 @@ var globalDefaults = {
   buildDir: 'build',
   configDir: 'config',
   contentExt: '.md',
+  templateRender: function(path, context, config) {
+    console.log(path);
+    console.log(context);
+    console.log(config);
+
+  }
 };
 
 
 function getConfig(basePath, config, defaults) {
   config = config || require(path.join(basePath, 'config'));
-  return _.defaults(config, defaults || {});
+  return utils.defaults(config, defaults || {});
 }
 
 
@@ -54,15 +59,20 @@ function buildPages(basePath, config, defaults) {
         // foo/bar/baz.md -> baz
         var baseName = path.basename(contentFile, contentExt);
 
-        var configPath = path.join(configDir, baseName, '.js');
-
         // If there's a matching js file in the config dir require it.
+        var configPath = path.join(configDir, baseName, '.js');
         if (utils.isFile(configPath)) {
           config.pageConfig = require(configPath.replace('.js', ''));
         }
 
-        // If that contains a template path render it with any context and write
-        // it out into iframe dir of the build directory.
+        if (config.pageConfig && config.pageConfig.templatePath) {
+          var templatePath = config.pageConfig.templatePath;
+          if (utils.isFile(path.join(path.dirname(configPath), templatePath))) {
+            // If that contains a template path render it with any context and
+            // write it out into iframe dir of the build directory.
+
+          }
+        }
 
 
         // Pass any context plus global context and render the page html
@@ -70,7 +80,7 @@ function buildPages(basePath, config, defaults) {
         // Render the markdow.
         pageContext.markdown = utils.renderMarkdown(contentFile);
       }
-    }).catch(function (err) {
+    }).catch(function(err) {
       throw err;
     });
 }

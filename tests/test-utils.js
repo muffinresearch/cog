@@ -75,3 +75,93 @@ describe('utils.renderMarkdown()', function(){
   });
 
 });
+
+
+describe('utils.defaults()', function() {
+
+  it('should handle merging defaults into object', function() {
+    var obj = {
+      bar: false,
+      foo: 'something',
+    };
+    var defaults  = {
+      bar: true,
+      newKey: 'new-thing'
+    };
+    var result = utils.defaults(obj, defaults);
+    assert.deepEqual(result, {
+      bar: false,
+      foo: 'something',
+      newKey: 'new-thing',
+    });
+  });
+
+  it('should handle merging defaults into empty object', function() {
+    var obj = {};
+    var defaults  = {
+      bar: true,
+      newKey: 'new-thing'
+    };
+    var result = utils.defaults(obj, defaults);
+    assert.deepEqual(result, {
+      bar: true,
+      newKey: 'new-thing',
+    });
+  });
+
+  it('should not override existing props', function() {
+    var obj  = {
+      bar: true,
+      newKey: 'new-thing'
+    };
+    var defaults  = {
+      bar: false,
+      newKey: 'other-thing'
+    };
+    var result = utils.defaults(obj, defaults);
+    assert.deepEqual(result, {
+      bar: true,
+      newKey: 'new-thing',
+    });
+  });
+
+  it('should not override null', function() {
+    var obj  = {
+      bar: null,
+      newKey: 'new-thing'
+    };
+    var defaults  = {
+      bar: false,
+      newKey: 'other-thing'
+    };
+    var result = utils.defaults(obj, defaults);
+    assert.deepEqual(result, {
+      bar: null,
+      newKey: 'new-thing',
+    });
+  });
+
+  it('should override an undefined property', function() {
+    var obj  = {
+      bar: undefined,
+    };
+    var defaults  = {
+      bar: false,
+    };
+    var result = utils.defaults(obj, defaults);
+    assert.deepEqual(result, {
+      bar: false,
+    });
+  });
+
+  it('should handle the object being undefined', function() {
+    var defaults  = {
+      bar: 'result',
+    };
+    var result = utils.defaults(undefined, defaults);
+    assert.deepEqual(result, {
+      bar: 'result',
+    });
+  });
+});
+
