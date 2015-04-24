@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/muffinresearch/cog.svg?branch=master)](https://travis-ci.org/muffinresearch/cog)
+[![Dependency Status](https://david-dm.org/muffinresearch/cog.svg)](https://david-dm.org/muffinresearch/cog)
+[![devDependency Status](https://david-dm.org/muffinresearch/cog/dev-status.svg)](https://david-dm.org/muffinresearch/cog#info=devDependencies)
 
 # Cog - static, living styleguide generator
 
