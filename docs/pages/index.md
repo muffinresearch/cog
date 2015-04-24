@@ -50,9 +50,43 @@ confgurable too.
 Generally everything is configurable. More specific config should override the global defaults or
 project-level conf. Should you find that's not the case it's probably a bug.
 
+
+### Building with grunt
+
+It's very simple. Here's an example Gruntfile.js snippet:
+
+```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({
+    // Styleguide builder task.
+    'cog': {
+      // This builds from a directoyr
+      'basic': {
+        src: 'tests/grunt-examples/basic',
+      },
+      // Options can take the place of the config.js file.
+      'basicopts': {
+        src: 'tests/grunt-examples/basic',
+        options: {
+          templateGlobals: {
+            'projectName': 'Basic Options',
+          }
+        }
+      }
+    }
+  });
+  grunt.loadTasks('cog');
+};
+```
+
+Then run `grunt cog` to run all the task or run a single task e.g. `grunt cog:basic`
+
 ### Kicking the tyres and filing bugs.
 
 This project is at an early stage. It's been built to replace a more dynamic styleguide. As it's used there
 we'll iron out the kinks as we find them. That said if you're interested in trying it out please do.
 
 If you find something that doesn't work as expected [please file a bug](https://github.com/muffinresearch/cog/issues/new).
+
+
+
