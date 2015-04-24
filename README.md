@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/muffinresearch/cog.svg?branch=master)](https://travis-ci.org/muffinresearch/cog)
 
-# Cog - static styleguide generator
+# Cog - static, living styleguide generator
 
 Cog is a simplistic approach to generating a static, living styleguide from markdown templates and config.
 
