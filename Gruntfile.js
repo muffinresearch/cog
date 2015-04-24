@@ -4,7 +4,7 @@ module.exports = function(grunt) {
       styleguide: {
         options: {
           targetDir: './static/lib',
-          layout: 'byType',
+          layout: 'byComponent',
           install: true,
           bowerOptions: {
             production: true,
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
     devserver: {
       options: {
-        base: 'example/build',
+        base: 'docs/build',
         type: 'http',
         port: grunt.option('port') || 4000,
       },

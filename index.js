@@ -34,7 +34,21 @@ var globalDefaults = {
     var nunjucksConfig = config.nunjucksConfig || {};
     var env = new nunjucks.Environment(nunjucksLoaders, nunjucksConfig);
     return env.render(template, context);
-  }
+  },
+  // Break points determine the buttons created to allow the user
+  // to change the resizable iframe to preset sizes.
+  breakPoints: [
+    {
+      name: 'Phone',
+      w: 350,
+      h: 598
+    }, {
+      name: 'Tablet',
+      w: 600,
+      h: 887
+    }
+  ],
+
 };
 
 
@@ -51,6 +65,15 @@ function prepareBuildDir(buildDir) {
   if (!utils.isDir(buildDir)) {
     fs.mkdirSync(buildDir);
   }
+}
+
+
+function getBreakPointConf(breakpointList) {
+  for (var i=0; i < breakpointList.length; i++) {
+    var currentObj = breakpointList[i];
+    currentObj.id = utils.textToId(currentObj.name);
+  }
+  return breakpointList;
 }
 
 
@@ -122,12 +145,14 @@ function buildPages(basePath, config, defaults) {
 
   var pageList = getPageList(pageDir, config);
 
+  // Iterate over the pages.
   for (var i=0; i<pageList.length; i++) {
     var baseName = pageList[i].baseName;
     var pageContext = {
       markdown: pageList[i].markdown,
       title: pageList[i].heading,
       pageNav: pageList,
+      enableFullScreen: true,
     };
 
     if (baseName !== 'index') {
@@ -143,6 +168,7 @@ function buildPages(basePath, config, defaults) {
     }
 
     pageConfig = utils.defaults(pageConfig, config);
+    pageContext.vpButtons = getBreakPointConf(pageConfig.breakPoints);
 
     var renderer = config.templateRenderer;
 
@@ -236,5 +262,6 @@ function cleanSync(buildDir, noop) {
 module.exports = {
   buildPages: buildPages,
   cleanSync: cleanSync,
+  getBreakPointConf: getBreakPointConf,
   getConfig: getConfig,
 };

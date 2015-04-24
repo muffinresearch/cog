@@ -51,13 +51,13 @@ describe('utils.getBaseDir()', function(){
 
   it('should return an absolute path', function(){
     // Tests are run from the project root.
-    assert.equal(utils.absolutify('example'),
-                 path.join(__dirname, '../example'));
+    assert.equal(utils.absolutify('docs'),
+                 path.join(__dirname, '../docs'));
   });
 
   it('should remove trailing slashes', function(){
-    assert.equal(utils.absolutify('example/'),
-                 path.join(__dirname, '../example'));
+    assert.equal(utils.absolutify('docs/'),
+                 path.join(__dirname, '../docs'));
   });
 
 });
@@ -65,7 +65,7 @@ describe('utils.getBaseDir()', function(){
 describe('utils.isDir()', function(){
 
   it('should return true for a dir', function(){
-    assert.ok(utils.isDir('example'));
+    assert.ok(utils.isDir('docs'));
   });
 
   it('should return false for a non-existent path', function(){
@@ -87,7 +87,7 @@ describe('utils.isDir()', function(){
 describe('utils.isFile()', function(){
 
   it('should return false for a dir', function(){
-    assert.notOk(utils.isFile('example'));
+    assert.notOk(utils.isFile('docs'));
   });
 
   it('should return false for a non-existent path', function(){
@@ -114,7 +114,7 @@ describe('utils.renderMarkdown()', function(){
   });
 
   it('should render markdown content from path', function(){
-    assert.include(utils.renderMarkdown('example/pages/buttons.md'),
+    assert.include(utils.renderMarkdown('docs/pages/buttons.md'),
                    '<h1 id="buttons-example">Buttons Example</h1>');
   });
 

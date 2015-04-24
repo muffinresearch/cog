@@ -4,29 +4,30 @@
 
   {% block desc %}{{ markdown }}{% endblock %}
 
+  {% if iframeSrc %}
   <div class="panel panel-default">
     <div class="panel-heading clearfix">
-      <h3 class="panel-title pull-left">Example <span class="size">@ 276 x 345</span></h3>
+      <h3 class="panel-title pull-left">Example <span class="size"></span></h3>
 
-      {#
-      <div class="btn-group pull-right">
-        <button type="button" class="active btn btn-default btn-xs trusted-ui-size">
-          <span class="glyphicon glyphicon-lock"></span> Trusted UI
+      {% if vpButtons or enableFullScreen %}
+      <div class="resize-buttons btn-group pull-right">
+        {% for vpButton in vpButtons %}
+        <button type="button"
+                class="btn btn-default btn-xs"
+                id="{{ vpButton.id }}"
+                data-vp-width="{{ vpButton.w }}"
+                data-vp-height="{{ vpButton.h }}">
+          {% if vpButton.icon %}<span class="glyphicon glyphicon-{{ vpButton.icon }}"></span>{% endif %} {{ vpButton.name }}
         </button>
+        {% endfor %}
 
-        <button type="button" class="btn btn-default btn-xs android-ui-size hide-tui-only">
-          <span class="glyphicon glyphicon-phone"></span> Android Phone
-        </button>
-
-        <button type="button" class="btn btn-default btn-xs android-tablet-size hide-tui-only">
-          <span class="glyphicon glyphicon-phone lg"></span> Android Tablet
-        </button>
-
+        {% if enableFullScreen %}
         <button type="button" class="btn btn-default btn-xs full-screen hide-tui-only">
           <span class="glyphicon glyphicon-fullscreen"></span> Full Screen
         </button>
+        {% endif %}
       </div>
-      #}
+      {% endif %}
 
     </div>
     <div class="panel-body">
@@ -36,5 +37,6 @@
     </div>
     <pre class="panel-footer"><code class="language-markup">{{ code }}</code></pre>
   </div>
+  {% endif %}
 
 {% endblock %}

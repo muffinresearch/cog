@@ -1,3 +1,7 @@
+body {
+  background: #fff;
+}
+
 .btn {
   display: inline-block;
   padding: 6px 12px;
