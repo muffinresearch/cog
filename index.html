@@ -1,97 +1,87 @@
 <!DOCTYPE html>
 <html lang="" dir="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Cog Docs | Documentation</title>
-    <link rel="stylesheet" href="/cog/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/cog/css/styleguide.css">
-    <link rel="stylesheet" href="/cog/lib/css/solarized_light.css">
-  </head>
 
-  <body class="styleguide">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Cog Docs</a>
-        </div>
-      </div>
-    </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Cog Docs | Documentation</title>
+  <link rel="stylesheet" href="/cog/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/cog/css/styleguide.css">
+  <link rel="stylesheet" href="/cog/lib/css/solarized_light.css"> </head>
 
-    
-      <a class="fork-link" href="https://github.com/muffinresearch/cog"><img src="/cog/github/orange.png" alt="Fork me on Github" /></a>
-    
-
+<body class="styleguide">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-  <li class="active"><a href="/">Index</a></li>
-
-  
-  <li><a href="/buttons.html">Buttons Example</a></li>
-  
-
-  
-  <li><a href="/documentation.html">Just docs</a></li>
-  
-
-  
-
-  
-  <li><a href="/view.html">View Example</a></li>
-  
-
-</ul>
-
-
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 id="documentation">Documentation</h1>
-<p>This is a quick demo of what&#39;s possible with cog.</p>
-<p>This styleguide both provides examples with its own local templates and also
-refers to a set of templates in an external directory.</p>
-<p>The idea being that you can have both examples that you build in the styleguide
-with smaller bits of code, e.g. typography and buttons and you can also
-directly render existing view templates and just specify your own context.</p>
-<h2 id="markdown-pages">Markdown Pages</h2>
-<p>This page content is written with markdown. So it&#39;s super easy to add whatever
-documentation you need to support the styleguide examples.</p>
-<p>Other code examples can be provided using Github flavoured Markdown (GFM).</p>
-<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">(arg)</span> </span>{
+      <div class="navbar-header"> <a class="navbar-brand" href="/">Cog Docs</a> </div>
+    </div>
+  </div>
+  <a class="fork-link" href="https://github.com/muffinresearch/cog"><img src="/cog/github/orange.png" alt="Fork me on Github" /></a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="/">Index</a></li>
+          <li><a href="/buttons.html">Buttons Example</a></li>
+          <li><a href="/documentation.html">Just docs</a></li>
+          <li><a href="/view.html">View Example</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1>Documentation</h1>
+        <p>This is a quick demo of what's possible with cog.</p>
+        <p>This styleguide both provides examples with its own local templates and also refers to a set of templates in an external directory.</p>
+        <p>The idea being that you can have both examples that you build in the styleguide with smaller bits of code, e.g. typography and buttons and you can also directly render existing view templates and just specify your own context.</p>
+        <h2>Markdown Pages</h2>
+        <p>This page content is written with markdown. So it's super easy to add whatever documentation you need to support the styleguide examples.</p>
+        <p>Other code examples can be provided using Github flavoured Markdown (GFM).</p> <pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">(arg)</span> </span>{
   <span class="hljs-built_in">console</span>.log(arg);
 }
 </code></pre>
-<h2 id="the-index-page">The Index Page</h2>
-<p>This page is the index page so it doesn&#39;t typically come with anything other than
-rendered markdown.</p>
-<h2 id="key-concepts">Key Concepts</h2>
-<p>Here&#39;s some details on the key concepts to make it possible to layout a static styleguide.</p>
-<h3 id="pages">Pages</h3>
-<p>Pages are the mainstay of the styleguide. A page represents the page of the styleguide.
-This page can contain purely documentation, in which case you just need a single file of
-GFM.</p>
-<h3 id="iframe-content">Iframe Content</h3>
-<p>To show an example in the styleguide you can provide templates and those are rendered
-and included in the page as a resizable iframe. The iframe means the page style and behaviour
-can&#39;t alter the iframe&#39;s look and feel. Also this gives us a way to provide a resizeable
-container that allows us to see the content at different breakpoints. Which are all
-confgurable too.</p>
-<h3 id="everything-is-configurable">Everything is Configurable</h3>
-<p>Generally everything is configurable. More specific config should override the global defaults or
-project-level conf. Should you find that&#39;s not the case it&#39;s probably a bug.</p>
-<h3 id="kicking-the-tyres-and-filing-bugs-">Kicking the tyres and filing bugs.</h3>
-<p>This project is at an early stage. It&#39;s been built to replace a more dynamic styleguide. As it&#39;s used there
-we&#39;ll iron out the kinks as we find them. That said if you&#39;re interested in trying it out please do.</p>
-<p>If you find something that doesn&#39;t work as expected <a href="https://github.com/muffinresearch/cog/issues/new">please file a bug</a>.</p>
-
-        </div>
+        <h2>The Index Page</h2>
+        <p>This page is the index page so it doesn't typically come with anything other than rendered markdown.</p>
+        <h2>Key Concepts</h2>
+        <p>Here's some details on the key concepts to make it possible to layout a static styleguide.</p>
+        <h3>Pages</h3>
+        <p>Pages are the mainstay of the styleguide. A page represents the page of the styleguide. This page can contain purely documentation, in which case you just need a single file of GFM.</p>
+        <h3>Iframe Content</h3>
+        <p>To show an example in the styleguide you can provide templates and those are rendered and included in the page as a resizable iframe. The iframe means the page style and behaviour can't alter the iframe's look and feel. Also this gives us a way
+          to provide a resizeable container that allows us to see the content at different breakpoints. Which are all confgurable too.</p>
+        <h3>Everything is Configurable</h3>
+        <p>Generally everything is configurable. More specific config should override the global defaults or project-level conf. Should you find that's not the case it's probably a bug.</p>
+        <h3>Building with grunt</h3>
+        <p>It's very simple. Here's an example Gruntfile.js snippet:</p> <pre><code class="language-javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(grunt)</span> </span>{
+  grunt.initConfig({
+    <span class="hljs-comment">// Styleguide builder task.</span>
+    <span class="hljs-string">'cog'</span>: {
+      <span class="hljs-comment">// This builds from a directoyr</span>
+      <span class="hljs-string">'basic'</span>: {
+        src: <span class="hljs-string">'tests/grunt-examples/basic'</span>,
+      },
+      <span class="hljs-comment">// Options can take the place of the config.js file.</span>
+      <span class="hljs-string">'basicopts'</span>: {
+        src: <span class="hljs-string">'tests/grunt-examples/basic'</span>,
+        options: {
+          templateGlobals: {
+            <span class="hljs-string">'projectName'</span>: <span class="hljs-string">'Basic Options'</span>,
+          }
+        }
+      }
+    }
+  });
+  grunt.loadTasks(<span class="hljs-string">'cog'</span>);
+};
+</code></pre>
+        <p>Then run <code>grunt cog</code> to run all the task or run a single task e.g. <code>grunt cog:basic</code></p>
+        <h3>Kicking the tyres and filing bugs.</h3>
+        <p>This project is at an early stage. It's been built to replace a more dynamic styleguide. As it's used there we'll iron out the kinks as we find them. That said if you're interested in trying it out please do.</p>
+        <p>If you find something that doesn't work as expected <a href="https://github.com/muffinresearch/cog/issues/new">please file a bug</a>.</p>
       </div>
     </div>
+  </div>
+  <script src="/cog/lib/jquery/js/jquery.min.js"></script>
+  <script src="/cog/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/cog/js/resize.js"></script>
+</body>
 
-    <script src="/cog/lib/jquery/js/jquery.min.js"></script>
-    <script src="/cog/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/cog/js/resize.js"></script>
-  </body>
 </html>
