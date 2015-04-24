@@ -3,11 +3,11 @@ var format = require('util').format;
 var path = require('path');
 
 var cheerio = require('cheerio');
-var marked = require('marked');
+var Remarkable = require('remarkable');
 var highlight = require('highlight.js');
 var prettyHTML = require('js-beautify').html;
 
-marked.setOptions({
+var md = new Remarkable({
   highlight: highlightFunc,
 });
 
@@ -79,9 +79,9 @@ function absolutify(basePath) {
 */
 function renderMarkdown(contentOrPath) {
   if (isFile(contentOrPath)) {
-    return marked(fs.readFileSync(contentOrPath, {encoding: 'utf8'}));
+    return md.render(fs.readFileSync(contentOrPath, {encoding: 'utf8'}));
   } else {
-    return marked(contentOrPath);
+    return md.render(contentOrPath);
   }
 }
 

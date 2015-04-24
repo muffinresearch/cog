@@ -110,12 +110,12 @@ describe('utils.renderMarkdown()', function(){
 
   it('should render markdown content as string', function(){
     assert.include(utils.renderMarkdown('# hai'),
-                   '<h1 id="hai">hai</h1>');
+                   '<h1>hai</h1>');
   });
 
   it('should render markdown content from path', function(){
     assert.include(utils.renderMarkdown('docs/pages/buttons.md'),
-                   '<h1 id="buttons-example">Buttons Example</h1>');
+                   '<h1>Buttons Example</h1>');
   });
 
 });
