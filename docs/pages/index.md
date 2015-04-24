@@ -45,7 +45,14 @@ can't alter the iframe's look and feel. Also this gives us a way to provide a re
 container that allows us to see the content at different breakpoints. Which are all
 confgurable too.
 
-
 ### Everything is Configurable
 
-Generally everything is configurable.
+Generally everything is configurable. More specific config should override the global defaults or
+project-level conf. Should you find that's not the case it's probably a bug.
+
+### Kicking the tyres and filing bugs.
+
+This project is at an early stage. It's been built to replace a more dynamic styleguide. As it's used there
+we'll iron out the kinks as we find them. That said if you're interested in trying it out please do.
+
+If you find something that doesn't work as expected [please file a bug](https://github.com/muffinresearch/cog/issues/new).
