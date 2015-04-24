@@ -136,7 +136,6 @@ function buildPages(basePath, config, defaults) {
   };
 
   config = getConfig(basePath, config, defaults || globalDefaults);
-  console.log(config);
   var pageDir = path.join(basePath, config.pageDir);
   if (!utils.isDir(pageDir)) {
     throw new Error(format('pagesDir %s is not a directory', pageDir));

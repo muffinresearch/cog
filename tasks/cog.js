@@ -9,16 +9,11 @@ module.exports = function (grunt) {
     // live in config.js can live in the Gruntfile.
     var options = this.options();
 
-    console.log(options);
     // The documenation src dir.
     var src = this.data.src;
 
     try {
-      if (options) {
-        cog.buildPages(src, options);
-      } else {
-        cog.buildPages(src);
-      }
+      cog.buildPages(src, options);
     } catch(e) {
       grunt.fail.warn(e);
     }
