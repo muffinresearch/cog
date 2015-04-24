@@ -98,3 +98,13 @@ pre.panel-footer {
     color: #ccc;
     font-size: 14px;
 }
+
+.fork-link {
+  border: 0;
+  height: 150px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 150px;
+  z-index: 2000; /* gah bootstrap */
+}

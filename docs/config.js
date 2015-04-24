@@ -24,6 +24,7 @@ module.exports = {
   templateGlobals: {
     projectName: 'Cog Docs',
     appMedia: '/static',
+    forkLink: 'https://github.com/muffinresearch/cog'
   },
   templateConfig: {
     // Relative to the styleguide. In this case it's the docs dir.
@@ -39,5 +40,5 @@ module.exports = {
     // src is relative to the styleguide project example.
     {src: '../example-src/css/', target: 'static/'},
     {src: '../example-src/CNAME', target: 'CNAME'}
-  ]
+  ],
 };
