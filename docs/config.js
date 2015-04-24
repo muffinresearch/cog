@@ -37,6 +37,7 @@ module.exports = {
   // Detail content here to copy into the build dir.
   copy: [
     // src is relative to the styleguide project example.
-    {src: '../example-src/css/', target: 'static/'}
+    {src: '../example-src/css/', target: 'static/'},
+    {src: '../example-src/CNAME', target: 'CNAME'}
   ]
 };
