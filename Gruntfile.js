@@ -42,13 +42,23 @@ module.exports = function(grunt) {
       server: {}
     },
 
+    'gh-pages': {
+      options: {
+        base: 'docs/build',
+        message: 'Updating docs'
+      },
+      src: ['**']
+    },
+
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-devserver');
+  grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.registerTask('default', ['jshint']);
   grunt.registerTask('test', ['jshint', 'mochaTest']);
+  grunt.registerTask('publish-docs', ['test', 'gh-pages']);
 };

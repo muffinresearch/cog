@@ -14,6 +14,7 @@
     "grunt-bower-task": "^0.4.0",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-devserver": "^0.6.0",
+    "grunt-gh-pages": "^0.10.0",
     "grunt-mocha-test": "^0.12.7",
     "mocha": "^2.2.4"
   },
