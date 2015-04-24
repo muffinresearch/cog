@@ -3,3 +3,4 @@ bower_components
 npm-debug.log
 docs/build
 .grunt
+tests/**/build

@@ -94,6 +94,7 @@ function renderMarkdown(contentOrPath) {
 */
 function defaults(object, defaultObj) {
   object = object || {};
+  defaultObj = defaultObj || {};
   Object.keys(defaultObj).forEach(function(key) {
     if (typeof object[key] === 'undefined') {
       object[key] = defaultObj[key];
@@ -134,7 +135,7 @@ function prettyHTML_(html) {
     indent_char: ' ',
     indent_with_tabs: false,
     preserve_newlines: false,
-  }).replace(/^[ \t]*?$\r?\n/mg, '');
+  });//.replace(/^[ \t]*?$\r?\n/mg, '');
 }
 
 

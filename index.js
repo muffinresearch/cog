@@ -48,7 +48,9 @@ var globalDefaults = {
       h: 887
     }
   ],
-
+  templateGlobals: {
+    projectName: 'COG',
+  }
 };
 
 
@@ -109,6 +111,9 @@ function getPageList(pageDir, config) {
 
     // Grab the heading to use for title + nav.
     var heading = utils.getTextBySelector(markdown, 'h1');
+    if (!heading) {
+      grunt.log.warn('Missing heading in %s', contentFile);
+    }
     var id = utils.textToId(heading);
 
     pageList.push({
@@ -131,6 +136,7 @@ function buildPages(basePath, config, defaults) {
   };
 
   config = getConfig(basePath, config, defaults || globalDefaults);
+  console.log(config);
   var pageDir = path.join(basePath, config.pageDir);
   if (!utils.isDir(pageDir)) {
     throw new Error(format('pagesDir %s is not a directory', pageDir));
@@ -197,7 +203,7 @@ function buildPages(basePath, config, defaults) {
 
     if (iframeContent !== '') {
       var iframeContentPath = path.join(iframeDir, baseName + '.html');
-      fs.writeFileSync(iframeContentPath, iframeContent);
+      fs.writeFileSync(iframeContentPath, utils.prettyHTML(iframeContent));
       pageContext.iframeSrc = baseName + '.html';
 
       // Now highlight the content under sourcecodeSelector so we can include
@@ -220,7 +226,7 @@ function buildPages(basePath, config, defaults) {
       utils.defaults(templateConfig, config.templateConfig));
 
     var builtPagePath = path.join(buildDir, baseName + '.html');
-    fs.writeFileSync(builtPagePath, rendered);
+    fs.writeFileSync(builtPagePath, utils.prettyHTML(rendered));
   }
 
   // Copy all the cog static files into the build dir.

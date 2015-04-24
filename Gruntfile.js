@@ -50,6 +50,21 @@ module.exports = function(grunt) {
       src: ['**']
     },
 
+    // Styleguide builder task.
+    'cog': {
+      'basic': {
+        src: 'tests/grunt-examples/basic',
+      },
+      'basicopts': {
+        src: 'tests/grunt-examples/basic',
+        options: {
+          templateGlobals: {
+            'projectName': 'Basic Options',
+          }
+        }
+      }
+    }
+
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
@@ -57,6 +72,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-devserver');
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-mocha-test');
+
+  // Actually load cog's own task.
+  grunt.loadTasks('tasks');
 
   grunt.registerTask('default', ['jshint']);
   grunt.registerTask('test', ['jshint', 'mochaTest']);
