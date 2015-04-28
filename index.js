@@ -118,7 +118,7 @@ function getPageList(pageDir, config) {
 
     pageList.push({
       baseName: baseName,
-      href: '/' + baseName + '.html',
+      href: './' + baseName + '.html',
       id: id,
       markdown: markdown,
       heading: heading,

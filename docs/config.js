@@ -23,7 +23,7 @@ module.exports = {
   // assuming that key is not already defined.
   templateGlobals: {
     projectName: 'Cog Docs',
-    appMedia: '/static',
+    appMedia: '../static',
     forkLink: 'https://github.com/muffinresearch/cog'
   },
   templateConfig: {
