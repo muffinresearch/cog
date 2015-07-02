@@ -11,3 +11,10 @@ Examples are rendered and written out into html files that are included in the s
 ## Example and docs
 
 The docs of this tree are rendered with cog itself (so meta :)). Check them out here: http://cog.muffinresear.ch/
+
+## Todos
+
+* Split out the rendering of each file - to make file watching a bit nicer.
+* Add sourcecode live updating.
+* Add injection of snippet into a page by selector.
+* Add a jsx example.
