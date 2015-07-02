@@ -21,7 +21,6 @@
   var foo2 = document.querySelector('.foo2');
   var par = foo2.parentNode;
   var needsRemoving = true;
-
   window.setInterval(function() {
     if (needsRemoving) {
       foo.className = 'foo bar';
@@ -33,22 +32,5 @@
       needsRemoving = true;
     }
   }, 2000);
-
-  // select the target node
-  var target = document.querySelector('.wrapper');
-  var content = document.querySelector('.content');
-
-  // create an observer instance
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      parent.postMessage(target.innerHTML, window.location.origin);
-    });
-  });
-
-  // configuration of the observer:
-  var config = { attributes: true, childList: true, characterData: true, subtree: true };
-
-  // pass in the target node, as well as the observer options
-  observer.observe(target, config);
 </script>
 {% endblock %}
