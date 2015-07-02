@@ -1,40 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ lang_dir }}">
+<html lang="{% if lang %}{{ lang }}{% else %}en-US{% endif %}" {% if lang_dir %}dir="{{ lang_dir }}"{% endif %}>
   <head>
+    {%- block defaultmeta %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>{{ projectName }}{% if title %} | {{ title }}{% endif %}</title>
-    <link rel="stylesheet" href="cog/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="cog/css/styleguide.css">
-    <link rel="stylesheet" href="cog/lib/css/solarized_light.css">
+    {%- endblock %}
+    {% block meta %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block headstyle %}{% endblock %}
+    {% block headscript %}{% endblock %}
   </head>
-  <body class="styleguide">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">{{ projectName }}</a>
-        </div>
-      </div>
-    </div>
-
-    {% if forkLink %}
-      <a class="fork-link" href="{{ forkLink }}"><img src="cog/github/orange.png" alt="Fork me on Github" /></a>
-    {% endif %}
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          {% include "_cog-sidebar-nav.html" %}
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          {% block content %}{% endblock %}
-        </div>
-      </div>
-    </div>
-
-    <script src="cog/lib/jquery/js/jquery.min.js"></script>
-    <script src="cog/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="cog/js/resize.js"></script>
+  <body {% block bodyclass %}{% endblock %}>
+    {% block bodycontent %}{% endblock %}
+    {% block bodyscript %}{% endblock %}
   </body>
 </html>

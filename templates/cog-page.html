@@ -1,42 +1,5 @@
-{% extends "cog-base.html" %}
+{% extends "cog-layout.html" %}
 
 {% block content %}
-
-  {% block desc %}{{ markdown }}{% endblock %}
-
-  {% if iframeSrc %}
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <h3 class="panel-title pull-left">Example <span class="size"></span></h3>
-
-      {% if vpButtons or enableFullScreen %}
-      <div class="resize-buttons btn-group pull-right">
-        {% for vpButton in vpButtons %}
-        <button type="button"
-                class="btn btn-default btn-xs"
-                id="{{ vpButton.id }}"
-                data-vp-width="{{ vpButton.w }}"
-                data-vp-height="{{ vpButton.h }}">
-          {% if vpButton.icon %}<span class="glyphicon glyphicon-{{ vpButton.icon }}"></span>{% endif %} {{ vpButton.name }}
-        </button>
-        {% endfor %}
-
-        {% if enableFullScreen %}
-        <button type="button" class="btn btn-default btn-xs full-screen hide-tui-only">
-          <span class="glyphicon glyphicon-fullscreen"></span> Full Screen
-        </button>
-        {% endif %}
-      </div>
-      {% endif %}
-
-    </div>
-    <div class="panel-body">
-      <div class="iframe-wrapper resizable">
-        <iframe src="iframe/{{ iframeSrc }}"></iframe>
-      </div>
-    </div>
-    <pre class="panel-footer"><code class="language-markup">{{ code }}</code></pre>
-  </div>
-  {% endif %}
-
+  {% block desc %}{{ html }}{% endblock %}
 {% endblock %}

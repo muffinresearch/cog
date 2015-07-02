@@ -1,0 +1,36 @@
+{% extends 'base-example.html' %}
+
+{% block example %}
+<h2>this is a heading</h2>
+
+<style>
+  .bar {
+    background: red;
+    color: #fff;
+  }
+</style>
+
+<div class="wrapper">
+    <p class="foo">Hello I'm some text</p>
+    <input type="text" value="hai" />
+    <p class="foo2">Hello I'm some text as well</p>
+</div>
+
+<script>
+  var foo = document.querySelector('.foo');
+  var foo2 = document.querySelector('.foo2');
+  var par = foo2.parentNode;
+  var needsRemoving = true;
+  window.setInterval(function() {
+    if (needsRemoving) {
+      foo.className = 'foo bar';
+      foo2.parentNode.removeChild(foo2);
+      needsRemoving = false;
+    } else {
+      foo.className = 'foo';
+      par.appendChild(foo2);
+      needsRemoving = true;
+    }
+  }, 2000);
+</script>
+{% endblock %}

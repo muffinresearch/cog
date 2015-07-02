@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left">{% if title %}{{ title }}{% else %}Example{% endif %} <span class="size"></span></h3>
+    {%- if breakPoints or enableFullScreen %}
+    <div class="resize-buttons btn-group pull-right">
+      {%- for vpButton in breakPoints %}
+      <button type="button"
+              class="btn btn-default btn-xs"
+              data-vp="{{ vpButton.w }}:{{ vpButton.h }}">
+        {% if vpButton.icon %}<span class="glyphicon glyphicon-{{ vpButton.icon }}"></span>{% endif %} {{ vpButton.name }}
+      </button>
+      {%- endfor %}
+      {%- if enableFullScreen %}
+      <button type="button" class="btn btn-default btn-xs full-screen hide-tui-only">
+        <span class="glyphicon glyphicon-fullscreen"></span> Full Screen
+      </button>
+      {%- endif %}
+    </div>
+    {%- endif %}
+  </div>
+  <div class="panel-body">
+    <div class="iframe-wrapper resizable">
+      <iframe id="{{ id }}" src="{{ iframeFilePath }}"></iframe>
+    </div>
+  </div>
+  <pre class="panel-footer"><code class="language-markup" data-iframe-id="{{ id }}">{{ code }}</code></pre>
+</div>
