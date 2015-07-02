@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var utils = require('../utils');
+var utils = require('../lib/utils');
 
 
 describe('utils.highlight()', function(){
@@ -10,6 +10,16 @@ describe('utils.highlight()', function(){
     var highlighted = utils.highlight('<div><p>test</p></div>');
     assert.include(highlighted, 'hljs-tag');
     assert.include(highlighted, 'hljs-title');
+  });
+
+});
+
+describe('utils.getBreakPointConf()', function() {
+
+  it('should add an id based on the name', function() {
+    var bpList = [{name: 'Thing thing'}];
+    var bpListUpdated = utils.getBreakPointConf(bpList);
+    assert.include(bpListUpdated[0].id, 'thing-thing');
   });
 
 });

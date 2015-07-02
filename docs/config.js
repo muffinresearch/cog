@@ -3,8 +3,8 @@ module.exports = {
   // to change the resizable iframe to preset sizes.
   breakPoints: [
     {
-      name: 'Trusted UI',
-      icon: 'lock',
+      name: 'Overlay',
+      icon: 'phone',
       w: 276,
       h: 384
     }, {

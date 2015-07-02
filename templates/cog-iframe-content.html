@@ -1,0 +1,17 @@
+{% extends "cog-base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block headstyle %}
+  {% for style in styles %}
+    <link rel="stylesheet" href="../static/{{ style }}" />
+  {% endfor %}
+{% endblock %}
+
+{% block bodycontent %}{{ iframeContent }}{% endblock %}
+
+{% block bodyscript %}
+  {% for script in scripts %}
+    <script src="../static/{{ script }}"></script>
+  {% endfor %}
+{% endblock %}

@@ -1,7 +1,7 @@
 'use strict';
 
-var cog = require('../index');
-var utils = require('../utils');
+var cog = require('../lib');
+var utils = require('../lib/utils');
 
 describe('cog.getConfig()', function(){
 
@@ -60,12 +60,4 @@ describe('cog.cleanSync()', function() {
 });
 
 
-describe('cog.getBreakPointConf()', function() {
 
-  it('should add an id based on the name', function() {
-    var bpList = [{name: 'Thing thing'}];
-    var bpListUpdated = cog.getBreakPointConf(bpList);
-    assert.include(bpListUpdated[0].id, 'thing-thing');
-  });
-
-});
