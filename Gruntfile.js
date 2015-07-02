@@ -62,7 +62,11 @@ module.exports = function(grunt) {
             'projectName': 'Basic Options',
           }
         }
+      },
+      'docs': {
+        src: 'docs',
       }
+
     }
 
   });
@@ -77,6 +81,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   grunt.registerTask('default', ['jshint']);
-  grunt.registerTask('test', ['jshint', 'mochaTest']);
+  grunt.registerTask('test', ['mochaTest', 'jshint']);
   grunt.registerTask('publish-docs', ['test', 'gh-pages']);
 };
