@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Cog Docs | View Example</title>
+  <title>Cog Docs | JS Example</title>
   <link rel="stylesheet" href="cog/lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="cog/css/styleguide.css">
   <link rel="stylesheet" href="cog/lib/css/solarized_light.css">
@@ -30,15 +30,20 @@
           <li><a href="./buttons.html">Buttons Example</a></li>
           <li><a href="./documentation.html">Just docs</a></li>
           <li><a href="./html-iframe-content.html">HTML content</a></li>
-          <li><a href="./js-example.html">JS Example</a></li>
+          <li class="active"><a href="./js-example.html">JS Example</a></li>
           <li><a href="./multi-iframe.html">Multiple iframes</a></li>
-          <li class="active"><a href="./view.html">View Example</a></li>
+          <li><a href="./view.html">View Example</a></li>
         </ul>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1>View Example</h1>
-        <p>This example shows that you can point at a view template and render that straight out of your project's tree.</p>
-        <p>This way the styleguide is a living representation of the templates and styles in your tree.</p>
+        <h1>JS Example</h1>
+        <p>This shows the dynamic code view.</p>
+        <p>If <code>dynamicSource</code> is true, the source specified by <code>sourcecodeSelector</code> is dynamically rendered from the iframe as highlighted HTML as it changes.</p>
+        <p>Configuration:</p> <pre><code class="language-yaml">dynamicSource: <span class="hljs-literal">true</span>
+sourcecodeSelector: '.wrapper'
+renderer: nunjucks
+<span class="hljs-keyword">template</span>: js-example.html
+</code></pre>
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left">Example <span class="size"></span></h3>
@@ -50,10 +55,35 @@
           </div>
           <div class="panel-body">
             <div class="iframe-wrapper resizable">
-              <iframe id="view1" src="iframe/view1.html"></iframe>
+              <iframe id="js-example1" src="iframe/js-example1.html"></iframe>
             </div>
-          </div> <pre class="panel-footer"><code class="language-markup" data-iframe-id="view1"><span class="hljs-variable">&lt;h1&gt;</span>I am an example app view page<span class="hljs-variable">&lt;/h1&gt;</span>
-<span class="hljs-variable">&lt;p&gt;</span>This is content rendered <span class="hljs-keyword">from</span> the iframeContext object supplied <span class="hljs-keyword">in</span> the conf<span class="hljs-variable">&lt;/p&gt;</span></code></pre> </div>
+          </div> <pre class="panel-footer"><code class="language-markup" data-iframe-id="js-example1">&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"foo"</span>&gt;Hello I&amp;apos;m <span class="hljs-keyword">some</span> <span class="hljs-type">text</span>!&lt;/p&gt;</code></pre>
+          <script>
+            (function() {
+              var iframe_ = document.querySelector('#js-example1');
+              iframe_.onload = function() {
+                hljs.configure({
+                  tabReplace: '    ',
+                  useBR: true,
+                });
+                var codeViewer = document.querySelector('code[data-iframe-id="js-example1"]');
+                var source = iframe_.contentWindow.document.querySelector('.wrapper');
+                codeViewer.innerHTML = hljs.highlight('html', html_beautify(source.innerHTML.trim())).value;
+                var observer = new window.MutationObserver(function(mutations) {
+                  mutations.forEach(function() {
+                    codeViewer.innerHTML = hljs.highlight('html', html_beautify(source.innerHTML.trim())).value;
+                  });
+                });
+                observer.observe(source, {
+                  attributes: true,
+                  characterData: true,
+                  childList: true,
+                  subtree: true,
+                });
+              }
+            })();
+          </script>
+        </div>
       </div>
     </div>
   </div>

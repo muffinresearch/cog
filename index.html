@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" dir="">
+<html lang="en-US">
 
 <head>
   <meta charset="utf-8">
@@ -8,7 +8,12 @@
   <title>Cog Docs | Documentation</title>
   <link rel="stylesheet" href="cog/lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="cog/css/styleguide.css">
-  <link rel="stylesheet" href="cog/lib/css/solarized_light.css"> </head>
+  <link rel="stylesheet" href="cog/lib/css/solarized_light.css">
+  <script src="cog/lib/js-beautify/beautify.js"></script>
+  <script src="cog/lib/js-beautify/beautify-css.js"></script>
+  <script src="cog/lib/js-beautify/beautify-html.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+</head>
 
 <body class="styleguide">
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -24,6 +29,9 @@
           <li class="active"><a href="index.html">Index</a></li>
           <li><a href="./buttons.html">Buttons Example</a></li>
           <li><a href="./documentation.html">Just docs</a></li>
+          <li><a href="./html-iframe-content.html">HTML content</a></li>
+          <li><a href="./js-example.html">JS Example</a></li>
+          <li><a href="./multi-iframe.html">Multiple iframes</a></li>
           <li><a href="./view.html">View Example</a></li>
         </ul>
       </div>
@@ -34,7 +42,7 @@
         <p>The idea being that you can have both examples that you build in the styleguide with smaller bits of code, e.g. typography and buttons and you can also directly render existing view templates and just specify your own context.</p>
         <h2>Markdown Pages</h2>
         <p>This page content is written with markdown. So it's super easy to add whatever documentation you need to support the styleguide examples.</p>
-        <p>Other code examples can be provided using Github flavoured Markdown (GFM).</p> <pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">(arg)</span> </span>{
+        <p>Other code examples can be provided using Github flavoured Markdown (GFM).</p> <pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params">arg</span>) </span>{
   <span class="hljs-built_in">console</span>.log(arg);
 }
 </code></pre>
@@ -50,7 +58,7 @@
         <h3>Everything is Configurable</h3>
         <p>Generally everything is configurable. More specific config should override the global defaults or project-level conf. Should you find that's not the case it's probably a bug.</p>
         <h3>Building with grunt</h3>
-        <p>It's very simple. Here's an example Gruntfile.js snippet:</p> <pre><code class="language-javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(grunt)</span> </span>{
+        <p>It's very simple. Here's an example Gruntfile.js snippet:</p> <pre><code class="language-javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">grunt</span>) </span>{
   grunt.initConfig({
     <span class="hljs-comment">// Styleguide builder task.</span>
     <span class="hljs-string">'cog'</span>: {
