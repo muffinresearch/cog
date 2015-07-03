@@ -24,4 +24,31 @@
     </div>
   </div>
   <pre class="panel-footer"><code class="language-markup" data-iframe-id="{{ id }}">{{ code }}</code></pre>
+  {% if dynamicSource %}
+   <script>
+    (function() {
+      var iframe_ = document.querySelector('#{{ id }}');
+      iframe_.onload = function() {
+        hljs.configure({
+          tabReplace: '    ',
+          useBR: true,
+        });
+        var codeViewer = document.querySelector('code[data-iframe-id="{{ id }}"]');
+        var source = iframe_.contentWindow.document.querySelector('{{ sourcecodeSelector }}');
+        codeViewer.innerHTML = hljs.highlight('html', html_beautify(source.innerHTML.trim())).value;
+        var observer = new window.MutationObserver(function(mutations) {
+          mutations.forEach(function() {
+            codeViewer.innerHTML = hljs.highlight('html', html_beautify(source.innerHTML.trim())).value;
+          });
+        });
+        observer.observe(source, {
+          attributes: true,
+          characterData: true,
+          childList: true,
+          subtree: true,
+        });
+      }
+    })();
+  </script>
+  {% endif %}
 </div>

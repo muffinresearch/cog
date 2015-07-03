@@ -67,11 +67,23 @@ module.exports = function(grunt) {
         src: 'docs',
       }
 
-    }
+    },
+
+
+    copy: {
+      lib: {
+        cwd: 'node_modules/js-beautify/js/lib',
+        src: ['*.js'],
+        dest: 'static/lib/js-beautify',
+        filter: 'isFile',
+        expand: true,
+      },
+    },
 
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-devserver');
   grunt.loadNpmTasks('grunt-gh-pages');
