@@ -19,6 +19,6 @@ The docs of this tree are rendered with cog itself (so meta :)). Check them out 
 ## Todos
 
 * Split out the rendering of each file - to make file watching a bit nicer.
-* Add sourcecode live updating.
+* ~~Add sourcecode live updating~~.
 * Add injection of snippet into a page by selector.
 * Add a jsx example.
