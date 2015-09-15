@@ -1,6 +1,15 @@
 language: node_js
 sudo: false
 node_js:
-- "0.10"
-- "0.12"
+- '0.10'
+- '0.12'
+before_install: npm install -g npm@'>=2.13.5'
 script: npm test
+deploy:
+  provider: npm
+  email: scolville@mozilla.com
+  api_key:
+    secure: ZBcJMkxknkt9zPOddXN3teMSYUdb9QYy8HUkrHx0+qWck9oBNKYa/cHhkGF+yOw0yM81SDlNcGRtcJMgyfFkpD30r8ubrRz7pIk7UavFwusFXA+PE58EyIVslvRChGFDvrlWs6bWd2iM1HpxZi1XEP8Ayc9cwbLSHgBtoTlVMlo=
+  on:
+    tags: true
+    repo: muffinresearch/cog-style-guide
