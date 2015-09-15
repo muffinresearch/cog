@@ -7,7 +7,7 @@
     "test": "node -e \"require('grunt').cli()\" null test"
   },
   "author": "Stuart Colville",
-  "license": "MPL 2.0",
+  "license": "MPL-2.0",
   "devDependencies": {
     "chai": "3.0.0",
     "grunt": "0.4.5",
