@@ -1,6 +1,6 @@
 {
   "name": "cog-style-guide",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Static living styleguide generator.",
   "main": "index.js",
   "scripts": {
