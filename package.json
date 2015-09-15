@@ -1,5 +1,5 @@
 {
-  "name": "cog",
+  "name": "cog-style-guide",
   "version": "0.0.1",
   "description": "Static living styleguide generator.",
   "main": "index.js",
