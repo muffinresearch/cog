@@ -1,3 +1,4 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 [![npm version](https://badge.fury.io/js/cog-style-guide.svg)](http://badge.fury.io/js/cog-style-guide)
 [![Build Status](https://travis-ci.org/muffinresearch/cog-style-guide.svg?branch=master)](https://travis-ci.org/muffinresearch/cog)
 [![Dependency Status](https://david-dm.org/muffinresearch/cog-style-guide.svg)](https://david-dm.org/muffinresearch/cog)
